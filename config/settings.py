@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -25,8 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third-party
-    'allauth',
-    'allauth.account',
+    # 'allauth',
+    # 'allauth.account',
     'crispy_forms',
     'debug_toolbar',
 
@@ -63,7 +64,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,8 +82,14 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+      # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      # 'NAME': config('DB_NAME'),
+      # 'USER': config('DB_USER'),
+      # 'PASSWORD': config('DB_PASSWORD'),
+      # 'HOST': config('DB_HOST'),
+      # 'PORT': config('DB_PORT', cast=int),
     }
 }
 
@@ -108,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 # https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-USE_I18N
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
@@ -162,7 +169,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 # https://django-allauth.readthedocs.io/en/latest/installation.html?highlight=backends
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+    #"allauth.account.auth_backends.AuthenticationBackend",
 )
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_SESSION_REMEMBER = True
